@@ -47,6 +47,8 @@
       (let ((cons-stable (lambda (p) (cons p "melpa-stable"))))
         (mapcar cons-stable stable-packages)))
 
+(global-set-key "\C-cs" 'magit-status)
+
 (projectile-global-mode)
 
 (require 'smartparens-config)
