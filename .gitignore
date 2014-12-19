@@ -1,0 +1,8 @@
+\#*
+.DS_Store
+auto-save-list/
+backups/
+elpa/
+*~
+places
+projectile-bookmarks.eld
