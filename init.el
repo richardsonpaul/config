@@ -32,7 +32,8 @@
   '(cider
     magit
     multiple-cursors
-    projectile))
+    projectile
+    smartparens))
 
 (setq package-enable-at-startup nil)
 (package-initialize)
@@ -41,11 +42,15 @@
   (package-refresh-contents))
 
 (setq other-packages
-      '(better-defaults . "melpa"))
+      '((better-defaults . "melpa")))
 
 (setq package-pinned-packages
       (let ((cons-stable (lambda (p) (cons p "melpa-stable"))))
         (mapcar cons-stable stable-packages)))
+
+(dolist (p (nconc stable-packages (mapcar 'car other-packages)))
+  (if (not (package-installed-p p))
+      (package-install p)))
 
 (global-set-key "\C-cs" 'magit-status)
 
@@ -65,7 +70,7 @@
 
 (setq frame-title-format '(:eval (if (buffer-file-name) "%b — %f" "%b")))
 
-;(setq max-specpdl-size 10) ; limit stack size in elisp
+(setq max-specpdl-size 10) ; limit stack size in elisp
 (setq debug-on-error t)
 
 (setq mac-command-modifier 'meta)
