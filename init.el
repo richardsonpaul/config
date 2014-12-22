@@ -58,6 +58,16 @@
 
 (require 'smartparens-config)
 (smartparens-global-mode t)
+(sp-use-smartparens-bindings)
+(define-key sp-keymap (kbd "s-s") 'sp-splice-sexp)
+(define-key sp-keymap (kbd "s-0") 'sp-forward-slurp-sexp)
+(define-key sp-keymap (kbd "s-9") 'sp-backward-slurp-sexp)
+(define-key sp-keymap (kbd "s-[") 'sp-backward-barf-sexp)
+(define-key sp-keymap (kbd "s-]") 'sp-forward-barf-sexp)
+(define-key sp-keymap [M-backspace] 'sp-backward-kill-symbol)
+(define-key sp-keymap [s-backspace] 'sp-backward-kill-word)
+(define-key sp-keymap (kbd "s-d") 'sp-kill-symbol)
+(define-key sp-keymap (kbd "M-d") 'sp-kill-word)
 
 (require 'whitespace)
 (setq whitespace-style '(empty tabs trailing lines-tail face))
