@@ -67,8 +67,8 @@
 (define-key sp-keymap (kbd "s-]") 'sp-forward-barf-sexp)
 (define-key sp-keymap [M-backspace] 'sp-backward-kill-symbol)
 (define-key sp-keymap [s-backspace] 'sp-backward-kill-word)
-(define-key sp-keymap (kbd "s-d") 'sp-kill-symbol)
-(define-key sp-keymap (kbd "M-d") 'sp-kill-word)
+(define-key sp-keymap (kbd "s-d") 'sp-kill-word)
+(define-key sp-keymap (kbd "M-d") 'sp-kill-symbol)
 (define-key sp-keymap (kbd "M-f") 'sp-forward-symbol)
 (define-key sp-keymap (kbd "s-f") 'forward-word)
 (define-key sp-keymap (kbd "M-b") 'sp-backward-symbol)
@@ -78,6 +78,7 @@
 (setq whitespace-style '(empty tabs trailing lines-tail face))
 (setq whitespace-line-column 125)
 (global-whitespace-mode t)
+(global-set-key [?\s- ] 'fixup-whitespace)
 
 (setq c-basic-offset 2)     ;; how far to indent
 (setq tab-width 4)          ;; interpretation of ascii 9
