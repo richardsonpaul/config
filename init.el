@@ -30,6 +30,8 @@
 
 (setq stable-packages
   '(cider
+    expand-region
+    flx-ido
     magit
     multiple-cursors
     projectile
@@ -42,7 +44,8 @@
   (package-refresh-contents))
 
 (setq other-packages
-      '((better-defaults . "melpa")))
+      '((better-defaults . "melpa")
+        (switch-window . "melpa")))
 
 (setq package-pinned-packages
       (let ((cons-stable (lambda (p) (cons p "melpa-stable"))))
@@ -52,7 +55,27 @@
   (if (not (package-installed-p p))
       (package-install p)))
 
+;; individual package config
+
+;; (require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+;; (require 'flx-ido)
+(ido-mode 1)
+(ido-everywhere 1)
+(flx-ido-mode 1)
+(setq ido-enable-flex-matching t)
+(setq ido-use-faces nil)
+;; (setq flx-ido-use-faces nil)
+
 (global-set-key "\C-cs" 'magit-status)
+
+;; (require 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-c C->") 'mc/skip-to-next-like-this)
 
 (projectile-global-mode)
 
@@ -73,12 +96,20 @@
 (define-key sp-keymap (kbd "s-f") 'forward-word)
 (define-key sp-keymap (kbd "M-b") 'sp-backward-symbol)
 (define-key sp-keymap (kbd "s-b") 'backward-symbol)
+(sp-pair "(" ")" :wrap "A-(")
+(sp-pair "[" "]" :wrap "A-[")
+(sp-pair "{" "}" :wrap "A-{")
+(sp-local-pair 'html-mode "<span class=\"bold\">" "</span>" :insert "C-c b" :wrap "C-c C-b")
 
-(require 'whitespace)
+(global-set-key (kbd "C-x o") 'switch-window)
+
+;; (require 'whitespace)
 (setq whitespace-style '(empty tabs trailing lines-tail face))
 (setq whitespace-line-column 125)
 (global-whitespace-mode t)
 (global-set-key [?\s- ] 'fixup-whitespace)
+
+;; miscellaneous config
 
 (setq c-basic-offset 2)     ;; how far to indent
 (setq tab-width 4)          ;; interpretation of ascii 9
@@ -91,3 +122,7 @@
 
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
+(setq mac-right-command-modifier 'alt)
+(setq mac-right-option-modifier 'hyper)
+
+(setq gc-cons-threshold 20000000)
