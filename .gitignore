@@ -1,11 +1,2 @@
 *desktop*
-projectile*
-%*
-.DS_Store
-auto-save-list
-backups
-elpa
-places
-tramp
-\#*
-*~
+repl-history
