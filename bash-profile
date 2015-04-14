@@ -1,0 +1,31 @@
+export ATTASK_FIRST=Paul
+export ATTASK_LAST=Richardson
+export ATTASK_USER=paulrichardson
+export ATTASK_DOC_HOME=/Users/paulrichardson/dev/AtTaskDoc
+export JAVA_HOME=$(/usr/libexec/java_home -v1.7)
+
+export JBOSS_HOME=/Users/paulrichardson/dev/jboss
+export CATALINA_HOME=/Users/paulrichardson/dev/tomcat
+#ulimit -n 20000
+
+export M2_HOME=/usr/local/maven/apache-maven-3.2.1
+export M2=$M2_HOME/bin
+export PATH=$M2:$JAVA_HOME/bin:$PATH
+export MAVEN_OPTS='-Xmx2048m -Xms2048m -XX:MaxPermSize=2048m'
+
+export LEIN_FAST_TRAMPOLINE=y
+alias cljsbuild="lein trampoline cljsbuild $0"
+alias repl="lein trampoline run -m clojure.main"
+
+stty -ixon -ixoff
+
+shopt -s histappend
+shopt -s cmdhist # commands entered on multiple lines use one line in history
+export HISTFILESIZE=1000000
+export HISTSIZE=100000
+export HISTCONTROL=ignoreboth #both spaces and duplicates
+export HISTIGNORE='ls:bg:fg:history'
+export HISTFORMAT='%F %T '
+export PROMPT_COMMAND='history -a'
+export PS1="\d, \t\n\w\n\u@\H> "
+export PS2=">"

@@ -48,14 +48,19 @@
         (switch-window . "melpa")))
 
 (setq package-pinned-packages
-      (let ((cons-stable (lambda (p) (cons p "melpa-stable"))))
-        (mapcar cons-stable stable-packages)))
+      (nconc other-packages
+       (let ((cons-stable (lambda (p) (cons p "melpa-stable"))))
+         (mapcar cons-stable stable-packages))))
 
 (dolist (p (nconc stable-packages (mapcar 'car other-packages)))
+  (package-refresh-contents)
   (if (not (package-installed-p p))
       (package-install p)))
 
 ;; individual package config
+
+;; cider
+(setq cider-show-error-buffer nil)
 
 ;; (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
@@ -95,7 +100,7 @@
 (define-key sp-keymap (kbd "M-f") 'sp-forward-symbol)
 (define-key sp-keymap (kbd "s-f") 'forward-word)
 (define-key sp-keymap (kbd "M-b") 'sp-backward-symbol)
-(define-key sp-keymap (kbd "s-b") 'backward-symbol)
+(define-key sp-keymap (kbd "s-b") 'backward-word)
 (sp-pair "(" ")" :wrap "A-(")
 (sp-pair "[" "]" :wrap "A-[")
 (sp-pair "{" "}" :wrap "A-{")
