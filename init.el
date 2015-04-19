@@ -30,12 +30,14 @@
 
 (setq stable-packages
   '(cider
+    clj-refactor
     expand-region
     flx-ido
     magit
     multiple-cursors
     projectile
-    smartparens))
+    smartparens
+    yasnippet))
 
 (setq package-enable-at-startup nil)
 (package-initialize)
@@ -61,6 +63,12 @@
 
 ;; cider
 (setq cider-show-error-buffer nil)
+
+;; clj-refactor
+(add-hook 'clojure-mode-hook
+          (lambda ()
+            (clj-refactor-mode 1)
+            (cljr-add-keybindings-with-prefix "C-c C-v")))
 
 ;; (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
@@ -101,9 +109,11 @@
 (define-key sp-keymap (kbd "s-f") 'forward-word)
 (define-key sp-keymap (kbd "M-b") 'sp-backward-symbol)
 (define-key sp-keymap (kbd "s-b") 'backward-word)
-(sp-pair "(" ")" :wrap "A-(")
+(define-key sp-keymap (kbd "C-S-a") 'sp-beginning-of-sexp)
+(define-key sp-keymap (kbd "C-S-e") 'sp-end-of-sexp)
+(sp-pair "(" ")" :wrap (or "A-9" "A-("))
 (sp-pair "[" "]" :wrap "A-[")
-(sp-pair "{" "}" :wrap "A-{")
+(sp-pair "{" "}" :wrap (or "H-[" "A-{"))
 (sp-local-pair 'html-mode "<span class=\"bold\">" "</span>" :insert "C-c b" :wrap "C-c C-b")
 
 (global-set-key (kbd "C-x o") 'switch-window)
@@ -113,6 +123,9 @@
 (setq whitespace-line-column 125)
 (global-whitespace-mode t)
 (global-set-key [?\s- ] 'fixup-whitespace)
+
+;; yasnippet
+(yas-global-mode 1)
 
 ;; miscellaneous config
 
