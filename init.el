@@ -55,7 +55,6 @@
          (mapcar cons-stable stable-packages))))
 
 (dolist (p (nconc stable-packages (mapcar 'car other-packages)))
-  (package-refresh-contents)
   (if (not (package-installed-p p))
       (package-install p)))
 
@@ -115,6 +114,9 @@
 (sp-pair "[" "]" :wrap "A-[")
 (sp-pair "{" "}" :wrap (or "H-[" "A-{"))
 (sp-local-pair 'html-mode "<span class=\"bold\">" "</span>" :insert "C-c b" :wrap "C-c C-b")
+(add-hook 'clojure-mode
+          (lambda ()
+            (define-key sp-keymap (kbd "C-S-<backspace>") 'cljr-raise-sexp)))
 
 (global-set-key (kbd "C-x o") 'switch-window)
 
