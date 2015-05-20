@@ -61,7 +61,13 @@
 ;; individual package config
 
 ;; cider
+(add-hook 'cider-mode-hook
+          (lambda ()
+            (define-key cider-mode-map (kbd "<s-tab>") 'complete-symbol)
+            (define-key cider-mode-map (kbd "C-c C-c") 'nrepl-close)))
 (setq cider-show-error-buffer nil)
+(setq cider-repl-history-file "cider-repl-history")
+(setq cider-repl-history-size 10000)
 
 ;; clj-refactor
 (add-hook 'clojure-mode-hook
