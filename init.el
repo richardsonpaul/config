@@ -4,6 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(desktop-save-mode t)
+ '(electric-indent-mode nil)
  '(inhibit-startup-screen t)
  '(use-dialog-box nil))
 (custom-set-faces
@@ -116,13 +117,20 @@
 (define-key sp-keymap (kbd "s-b") 'backward-word)
 (define-key sp-keymap (kbd "C-S-a") 'sp-beginning-of-sexp)
 (define-key sp-keymap (kbd "C-S-e") 'sp-end-of-sexp)
+(define-key sp-keymap (kbd "C-S-<backspace>") nil)
 (sp-pair "(" ")" :wrap (or "A-9" "A-("))
 (sp-pair "[" "]" :wrap "A-[")
 (sp-pair "{" "}" :wrap (or "H-[" "A-{"))
 (sp-local-pair 'html-mode "<span class=\"bold\">" "</span>" :insert "C-c b" :wrap "C-c C-b")
-(add-hook 'clojure-mode
+(mapc
+ (lambda (mode)
+   (add-hook mode
+             (lambda ()
+               (local-set-key (kbd "C-S-<backspace>") 'sp-splice-sexp-killing-around))))
+ '(emacs-lisp-mode-hook lisp-interaction-mode-hook))
+(add-hook 'clojure-mode-hook
           (lambda ()
-            (define-key sp-keymap (kbd "C-S-<backspace>") 'cljr-raise-sexp)))
+            (local-set-key (kbd "C-S-<backspace>") 'cljr-raise-sexp)))
 
 (global-set-key (kbd "C-x o") 'switch-window)
 
