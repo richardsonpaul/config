@@ -4,7 +4,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(desktop-save-mode t)
- '(electric-indent-mode nil)
  '(inhibit-startup-screen t)
  '(use-dialog-box nil))
 (custom-set-faces
@@ -75,6 +74,9 @@
           (lambda ()
             (clj-refactor-mode 1)
             (cljr-add-keybindings-with-prefix "C-c C-v")))
+
+;; clojure-mode
+(setq clojure-defun-style-default-indent t)
 
 ;; (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
