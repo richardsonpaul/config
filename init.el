@@ -115,6 +115,12 @@
 
 (projectile-global-mode)
 
+;; shell
+(defun add-mode-line-dirtrack ()
+  (add-to-list 'mode-line-buffer-identification
+               '(:propertize (" " default-directory " ") face dired-directory)))
+(add-hook 'shell-mode-hook 'add-mode-line-dirtrack)
+
 (require 'smartparens-config)
 (smartparens-global-mode t)
 (setq sp-navigate-close-if-unbalanced t)
