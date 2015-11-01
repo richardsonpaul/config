@@ -75,6 +75,8 @@
               (define-key cider-repl-mode-map (kbd "C-c C-l") 'cider-repl-clear-buffer)
               (define-key cider-mode-map (kbd "C-c M-n") 'cider-eval-ns-form)
               (define-key cider-mode-map (kbd "C-c C-n") 'cider-repl-set-ns)
+              (define-key cider-mode-map (kbd "C-c M-c") 'cider-jack-in)
+              (define-key cider-mode-map (kbd "C-c M-j") 'cider-connect)
               (define-key cider-mode-map (kbd "C-c n")
                 (lambda ()
                   (interactive)
