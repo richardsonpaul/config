@@ -5,6 +5,8 @@
  ;; If there is more than one, they won't work right.
  '(desktop-save-mode t)
  '(inhibit-startup-screen t)
+ '(magit-push-always-verify nil)
+ '(ring-bell-function (quote ignore) t)
  '(use-dialog-box nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -42,9 +44,6 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 
-(when (not package-archive-contents)
-  (package-refresh-contents))
-
 (setq other-packages
       '((better-defaults . "melpa")
         (switch-window . "melpa")))
@@ -54,9 +53,12 @@
        (let ((cons-stable (lambda (p) (cons p "melpa-stable"))))
          (mapcar cons-stable stable-packages))))
 
-(dolist (p (nconc stable-packages (mapcar 'car other-packages)))
-  (if (not (package-installed-p p))
-      (package-install p)))
+(defun update-packages ()
+  (interactive)
+  (package-refresh-contents)
+  (dolist (p (nconc stable-packages (mapcar 'car other-packages)))
+    (if (not (package-installed-p p))
+        (package-install p))))
 
 ;; individual package config
 
