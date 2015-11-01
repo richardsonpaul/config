@@ -3,5 +3,5 @@
                   [lein-ancient "0.6.7"]
                   [lein-plz "0.4.0-SNAPSHOT" :exclusions [[rewrite-clj] [ancient-clj]]]]
         :dependencies [[org.clojars.gjahad/debug-repl "0.3.3"]
-                       ^:replace "0.2.12"]
+                       [org.clojure/tools.nrepl "0.2.12"]]
         :plz ["/Users/paulrichardson/.lein/plzmap.edn"]}}
