@@ -145,6 +145,7 @@
 (define-key sp-keymap (kbd "C-S-a") 'sp-beginning-of-sexp)
 (define-key sp-keymap (kbd "C-S-e") 'sp-end-of-sexp)
 (define-key sp-keymap (kbd "C-S-<backspace>") nil)
+(define-key sp-keymap (kbd "A-s") 'sp-split-sexp)
 (sp-pair "(" ")" :wrap (or "A-9" "A-("))
 (sp-pair "[" "]" :wrap "A-[")
 (sp-pair "{" "}" :wrap (or "H-[" "A-{"))
