@@ -7,7 +7,7 @@
                  [org.clojure/clojurescript "1.7.170"]
                  [com.cemerick/piggieback "0.2.1"]
                  [weasel "0.7.0"]
-                 [pandeiro/boot-http "0.7.3"]
+                 [pandeiro/boot-http "0.7.6"]
                  [org.clojure/tools.nrepl "0.2.12"]
                  [javax.servlet/servlet-api "2.5"]])
 
@@ -43,3 +43,8 @@
 (deftask dev []
   (cider)
   (term))
+
+(deftask a-out
+  "Executes build.boot for side effects"
+  []
+  identity)
